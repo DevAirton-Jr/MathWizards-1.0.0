@@ -1,0 +1,110 @@
+/* ================= Global Styles ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #1a1a2e, #2b2b3d);
+  color: #f0f0f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+input, textarea {
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 12px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 15px;
+  background-color: #2b2b3d;
+  color: #f0f0f5;
+  transition: border-color 0.3s;
+}
+
+input:focus, textarea:focus {
+  border-color: #4c84ff;
+  outline: none;
+}
+
+/* Cards */
+.card {
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #f0f0f5;
+}
+
+/* Text Align */
+.text-center {
+  text-align: center;
+}
+
+/* Buttons - Gradients */
+.primary-btn {
+  background: linear-gradient(135deg, #4c84ff, #6a8cff);
+  color: #fff;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #3a6de0, #5a72ff);
+}
+
+.secondary-btn {
+  background: linear-gradient(135deg, #6c757d, #8a8f99);
+  color: #fff;
+}
+
+.secondary-btn:hover {
+  background: linear-gradient(135deg, #5a6169, #777c88);
+}
+
+.success-btn {
+  background: linear-gradient(135deg, #28d79f, #20b47b);
+  color: #fff;
+}
+
+.success-btn:hover {
+  background: linear-gradient(135deg, #20b47b, #1aa169);
+}
+
+.danger-btn {
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d);
+  color: #fff;
+}
+
+.danger-btn:hover {
+  background: linear-gradient(135deg, #e64b4b, #d93a3a);
+}

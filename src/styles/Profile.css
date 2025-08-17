@@ -1,0 +1,239 @@
+/* ================= Profile Page ================= */
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #2b2b3d);
+  font-family: 'Poppins', sans-serif;
+  padding: 40px 15px;
+  color: #f0f0f5;
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Cabeçalho do perfil */
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ffcc00;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+
+.profile-header p {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+/* Mensagens de feedback */
+.profile-message {
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.profile-message.success {
+  background: linear-gradient(135deg, #28d79f, #20b47b);
+  color: #f0f0f5;
+}
+
+.profile-message.error {
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d);
+  color: #f0f0f5;
+}
+
+/* Conteúdo do perfil */
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+/* Foto do usuário */
+.profile-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-photo-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #4c84ff, #6a8cff);
+  color: #f0f0f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Grid de avatares */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 70px);
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.avatar-item {
+  width: 70px;
+  height: 70px;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.avatar-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-item.selected {
+  border: 2px solid #28d79f;
+  box-shadow: 0 8px 25px rgba(40,167,69,0.4);
+}
+
+/* Formulário do perfil */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 12px;
+  font-size: 16px;
+  background: #2b2b3d;
+  color: #f0f0f5;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #4c84ff;
+  outline: none;
+}
+
+/* Botão de salvar */
+.save-profile-button {
+  background: linear-gradient(135deg, #28d79f, #20b47b);
+  color: #f0f0f5;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.save-profile-button:hover {
+  background: linear-gradient(135deg, #20b47b, #1aa169);
+}
+
+.save-profile-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+/* Estatísticas do perfil */
+.profile-stats {
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  border-radius: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+  padding: 30px;
+}
+
+.profile-stats h2 {
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffcc00;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #28d79f;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

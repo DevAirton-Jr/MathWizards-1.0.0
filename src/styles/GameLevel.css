@@ -1,0 +1,202 @@
+/* ================= Game Level ================= */
+.game-level {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #16161f, #1f1f2e);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  padding-top: 50px;
+}
+
+/* Container central */
+.game-container {
+  width: 95%;
+  max-width: 750px;
+  background: linear-gradient(145deg, #1f1f2e, #2b2b3d);
+  border-radius: 25px;
+  padding: 50px 35px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Botões discretos no topo */
+.game-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.control-button {
+  background: rgba(255,255,255,0.05);
+  color: #f0f0f5;
+  border: 1px solid #444;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-button:hover {
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Cabeçalho nível */
+.level-title {
+  font-size: 2.5rem;
+  color: #4c84ff;
+  font-weight: 700;
+  margin-bottom: 35px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Timer */
+.timer {
+  position: relative;
+  height: 20px;
+  background: #222;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 25px 0 50px 0;
+}
+
+.timer-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #28d79f, #20b47b);
+  width: 100%;
+  transition: width 1s linear;
+}
+
+.timer span {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f0f0f5;
+}
+
+/* Card da pergunta */
+.question-card {
+  background: linear-gradient(145deg, #1f1f2e, #2b2b3d);
+  padding: 50px 30px;
+  border-radius: 25px;
+  margin-bottom: 50px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+  transition: transform 0.3s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Texto da pergunta */
+.question-text {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #f0f0f5;
+  line-height: 1.4;
+}
+
+/* Opções de resposta */
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.option-button {
+  background: linear-gradient(135deg, #4c84ff, #6a8cff);
+  color: #f0f0f5;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 25px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-button:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, #3a70e0, #5a52e6);
+}
+
+.option-button.correct {
+  background: linear-gradient(135deg, #28d79f, #20b47b) !important;
+  box-shadow: 0 6px 20px rgba(40,167,69,0.5);
+}
+
+.option-button.incorrect {
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d) !important;
+  box-shadow: 0 6px 20px rgba(220,53,69,0.5);
+}
+
+/* Feedback de resposta */
+.result {
+  margin-top: 35px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Card do resultado final */
+.result-container {
+  background: linear-gradient(145deg, #1f1f2e, #2b2b3d);
+  border-radius: 25px;
+  padding: 50px 35px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  text-align: center;
+}
+
+.result-container h2 {
+  font-size: 2.4rem;
+  color: #4c84ff;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .question-text {
+    font-size: 1.8rem;
+    margin-bottom: 35px;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .option-button {
+    font-size: 1.3rem;
+    padding: 20px 0;
+  }
+
+  .game-controls {
+    position: static;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,42 @@
+/* ================= Avatar Grid ================= */
+.avatarGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.avatarCard {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  padding: 5px;
+  text-align: center;
+  background: linear-gradient(145deg, #2b2b3d, #1f1f2e);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  transition: all 0.3s;
+}
+
+.avatarCard:hover {
+  border-color: #4c84ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+}
+
+.selected {
+  border-color: #28d79f;
+  box-shadow: 0 8px 25px rgba(40,167,69,0.4);
+}
+
+.avatarImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarName {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: #f0f0f5;
+}

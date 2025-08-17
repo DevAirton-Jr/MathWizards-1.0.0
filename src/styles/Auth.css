@@ -1,0 +1,194 @@
+/* ================= BASE STYLES ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= AUTH CONTAINER ================= */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('../assets/images/mathwizards.png') no-repeat center center fixed;
+  background-size: cover;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ================= AUTH CARD ================= */
+.auth-card {
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= HEADER STYLES ================= */
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login-logo {
+  width: 180px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.login-logo:hover {
+  transform: scale(1.05);
+}
+
+.auth-header h1 {
+  color: #ffcc00;
+  margin-bottom: 10px;
+  font-size: 2.8rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+}
+
+.auth-header p {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+/* ================= FORM STYLES ================= */
+.auth-form {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #555;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #2b2b3d;
+  color: #ffffff;
+}
+
+.form-group input::placeholder {
+  color: #bbbbbb;
+}
+
+/* ================= BUTTON STYLES ================= */
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #28d79f, #20b47b);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+.auth-button:hover {
+  background: linear-gradient(135deg, #20b47b, #1aa169);
+  transform: translateY(-2px);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+}
+
+.auth-button:disabled {
+  background: #555;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ================= FOOTER STYLES ================= */
+.auth-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-footer p {
+  color: #ffffff;
+}
+
+.auth-footer a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.auth-footer a:hover {
+  color: #ffd633;
+  text-decoration: underline;
+}
+
+/* ================= ERROR MESSAGE ================= */
+.auth-error {
+  background: linear-gradient(135deg, #ff6b6b, #ff4d4d);
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+  animation: shake 0.5s;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* ================= RESPONSIVE DESIGN ================= */
+@media (max-width: 576px) {
+  .auth-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+  
+  .login-logo {
+    width: 140px;
+  }
+  
+  .auth-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .form-group input {
+    padding: 12px;
+  }
+}
