@@ -61,6 +61,14 @@ Os usuários podem personalizar seu perfil com:
 - Idade
 - Biografia
 
+## Screenshots (Imagem da tela de login criada por IA (Será feito um update)
+<img width="1861" height="951" alt="image" src="https://github.com/user-attachments/assets/1c85927d-8f12-4807-93b6-c5c490e4cc90" />
+<img width="1858" height="948" alt="image" src="https://github.com/user-attachments/assets/f9311c5f-7264-4a7f-8470-1642d8fa72cc" />
+<img width="1874" height="949" alt="image" src="https://github.com/user-attachments/assets/29669f86-80bd-42a2-8311-8e0f139d325d" />
+<img width="1873" height="950" alt="image" src="https://github.com/user-attachments/assets/28b5e7b9-b93a-42ec-b318-d8f58556e2e7" />
+<img width="1872" height="950" alt="image" src="https://github.com/user-attachments/assets/62748a1f-4e46-4987-93d9-c3da0e077de5" />
+
+
 ## Próximas Melhorias
 
 - Modo multijogador
