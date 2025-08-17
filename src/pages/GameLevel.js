@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/GameLevel.css';
@@ -31,146 +31,144 @@ function GameLevel() {
     return options.sort(() => Math.random() - 0.5);
   };
 
-  const generateQuestions = () => {
+  const generateQuestions = useCallback(() => {
     const newQuestions = [];
     for (let i = 0; i < 5; i++) {
       let question = {};
       switch (levelNum) {
-        case 1: // Soma simples
+        case 1:
           question = {
             text: `Quanto é ${i + 1} + ${i + 2}?`,
             correctAnswer: (i + 1) + (i + 2),
             options: generateOptions((i + 1) + (i + 2), 10)
           };
           break;
-        case 2: // Subtração simples
+        case 2:
           question = {
             text: `Quanto é ${i + 5} - ${i + 2}?`,
             correctAnswer: (i + 5) - (i + 2),
             options: generateOptions((i + 5) - (i + 2), 10)
           };
           break;
-        case 3: // Multiplicação simples
-          {
-            const a = i + 1;
-            const b = (i % 5) + 1;
-            question = {
-              text: `Quanto é ${a} × ${b}?`,
-              correctAnswer: a * b,
-              options: generateOptions(a * b, 20)
-            };
+        case 3: {
+          const a = i + 1;
+          const b = (i % 5) + 1;
+          question = {
+            text: `Quanto é ${a} × ${b}?`,
+            correctAnswer: a * b,
+            options: generateOptions(a * b, 20)
+          };
+          break;
+        }
+        case 4: {
+          const a = Math.floor(Math.random() * 10) + 5;
+          const b = Math.floor(Math.random() * 10) + 5;
+          question = {
+            text: `Quanto é ${a} × ${b}?`,
+            correctAnswer: a * b,
+            options: generateOptions(a * b, 100)
+          };
+          break;
+        }
+        case 5: {
+          const b = Math.floor(Math.random() * 9) + 2;
+          const correct = (Math.floor(Math.random() * 10) + 1) * b;
+          question = {
+            text: `Quanto é ${correct} ÷ ${b}?`,
+            correctAnswer: correct / b,
+            options: generateOptions(correct / b, 20)
+          };
+          break;
+        }
+        case 6: {
+          const a = Math.floor(Math.random() * 90) + 10;
+          const b = Math.floor(Math.random() * 90) + 10;
+          question = {
+            text: `Quanto é ${a} + ${b}?`,
+            correctAnswer: a + b,
+            options: generateOptions(a + b, 200)
+          };
+          break;
+        }
+        case 7: {
+          const a = Math.floor(Math.random() * 100) + 50;
+          const b = Math.floor(Math.random() * 50) + 10;
+          question = {
+            text: `Quanto é ${a} - ${b}?`,
+            correctAnswer: a - b,
+            options: generateOptions(a - b, 150)
+          };
+          break;
+        }
+        case 8: {
+          const a = Math.floor(Math.random() * 20) + 10;
+          const b = Math.floor(Math.random() * 20) + 10;
+          question = {
+            text: `Quanto é ${a} × ${b}?`,
+            correctAnswer: a * b,
+            options: generateOptions(a * b, 400)
+          };
+          break;
+        }
+        case 9: {
+          const b = Math.floor(Math.random() * 20) + 2;
+          const a = Math.floor(Math.random() * 200) + 20;
+          question = {
+            text: `Quanto é ${a} ÷ ${b}? (arredonde para inteiro)`,
+            correctAnswer: Math.round(a / b),
+            options: generateOptions(Math.round(a / b), 50)
+          };
+          break;
+        }
+        case 10: {
+          const op = Math.floor(Math.random() * 4);
+          let a, b;
+          switch (op) {
+            case 0:
+              a = Math.floor(Math.random() * 100) + 1;
+              b = Math.floor(Math.random() * 100) + 1;
+              question = {
+                text: `Quanto é ${a} + ${b}?`,
+                correctAnswer: a + b,
+                options: generateOptions(a + b, 200)
+              };
+              break;
+            case 1:
+              a = Math.floor(Math.random() * 150) + 50;
+              b = Math.floor(Math.random() * 100) + 10;
+              question = {
+                text: `Quanto é ${a} - ${b}?`,
+                correctAnswer: a - b,
+                options: generateOptions(a - b, 200)
+              };
+              break;
+            case 2:
+              a = Math.floor(Math.random() * 30) + 5;
+              b = Math.floor(Math.random() * 30) + 5;
+              question = {
+                text: `Quanto é ${a} × ${b}?`,
+                correctAnswer: a * b,
+                options: generateOptions(a * b, 600)
+              };
+              break;
+            case 3:
+              b = Math.floor(Math.random() * 20) + 2;
+              a = b * (Math.floor(Math.random() * 20) + 1);
+              question = {
+                text: `Quanto é ${a} ÷ ${b}?`,
+                correctAnswer: a / b,
+                options: generateOptions(a / b, 50)
+              };
+              break;
+            default:
+              question = {
+                text: `Pergunta de nível ${levelNum}`,
+                correctAnswer: 1,
+                options: [1, 2, 3, 4]
+              };
           }
           break;
-        case 4: // Multiplicação intermediária
-          {
-            const a = Math.floor(Math.random() * 10) + 5;
-            const b = Math.floor(Math.random() * 10) + 5;
-            question = {
-              text: `Quanto é ${a} × ${b}?`,
-              correctAnswer: a * b,
-              options: generateOptions(a * b, 100)
-            };
-          }
-          break;
-        case 5: // Divisão simples
-          {
-            const b = Math.floor(Math.random() * 9) + 2;
-            const correct = (Math.floor(Math.random() * 10) + 1) * b;
-            question = {
-              text: `Quanto é ${correct} ÷ ${b}?`,
-              correctAnswer: correct / b,
-              options: generateOptions(correct / b, 20)
-            };
-          }
-          break;
-        case 6: // Soma avançada
-          {
-            const a = Math.floor(Math.random() * 90) + 10;
-            const b = Math.floor(Math.random() * 90) + 10;
-            question = {
-              text: `Quanto é ${a} + ${b}?`,
-              correctAnswer: a + b,
-              options: generateOptions(a + b, 200)
-            };
-          }
-          break;
-        case 7: // Subtração avançada
-          {
-            const a = Math.floor(Math.random() * 100) + 50;
-            const b = Math.floor(Math.random() * 50) + 10;
-            question = {
-              text: `Quanto é ${a} - ${b}?`,
-              correctAnswer: a - b,
-              options: generateOptions(a - b, 150)
-            };
-          }
-          break;
-        case 8: // Multiplicação avançada
-          {
-            const a = Math.floor(Math.random() * 20) + 10;
-            const b = Math.floor(Math.random() * 20) + 10;
-            question = {
-              text: `Quanto é ${a} × ${b}?`,
-              correctAnswer: a * b,
-              options: generateOptions(a * b, 400)
-            };
-          }
-          break;
-        case 9: // Divisão avançada
-          {
-            const b = Math.floor(Math.random() * 20) + 2;
-            const a = Math.floor(Math.random() * 200) + 20;
-            question = {
-              text: `Quanto é ${a} ÷ ${b}? (arredonde para inteiro)`,
-              correctAnswer: Math.round(a / b),
-              options: generateOptions(Math.round(a / b), 50)
-            };
-          }
-          break;
-        case 10: // Revisão mista
-          {
-            const op = Math.floor(Math.random() * 4);
-            let a, b;
-            switch (op) {
-              case 0: // Soma
-                a = Math.floor(Math.random() * 100) + 1;
-                b = Math.floor(Math.random() * 100) + 1;
-                question = {
-                  text: `Quanto é ${a} + ${b}?`,
-                  correctAnswer: a + b,
-                  options: generateOptions(a + b, 200)
-                };
-                break;
-              case 1: // Subtração
-                a = Math.floor(Math.random() * 150) + 50;
-                b = Math.floor(Math.random() * 100) + 10;
-                question = {
-                  text: `Quanto é ${a} - ${b}?`,
-                  correctAnswer: a - b,
-                  options: generateOptions(a - b, 200)
-                };
-                break;
-              case 2: // Multiplicação
-                a = Math.floor(Math.random() * 30) + 5;
-                b = Math.floor(Math.random() * 30) + 5;
-                question = {
-                  text: `Quanto é ${a} × ${b}?`,
-                  correctAnswer: a * b,
-                  options: generateOptions(a * b, 600)
-                };
-                break;
-              case 3: // Divisão
-                b = Math.floor(Math.random() * 20) + 2;
-                a = b * (Math.floor(Math.random() * 20) + 1);
-                question = {
-                  text: `Quanto é ${a} ÷ ${b}?`,
-                  correctAnswer: a / b,
-                  options: generateOptions(a / b, 50)
-                };
-                break;
-            }
-          }
-          break;
+        }
         default:
           question = {
             text: `Pergunta de nível ${levelNum}`,
@@ -181,7 +179,23 @@ function GameLevel() {
       newQuestions.push(question);
     }
     return newQuestions;
-  };
+  }, [levelNum]);
+
+  const handleNextQuestion = useCallback(() => {
+    setShowResult(false);
+    setSelectedAnswer(null);
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+      setTimeLeft(30);
+    } else {
+      setGameOver(true);
+      const passed = score >= Math.ceil(questions.length * 0.6);
+      if (passed) {
+        completeLevel(levelNum);
+        playSound("win");
+      }
+    }
+  }, [currentQuestion, questions.length, score, completeLevel, levelNum]);
 
   useEffect(() => {
     setQuestions(generateQuestions());
@@ -191,7 +205,7 @@ function GameLevel() {
     setShowResult(false);
     setGameOver(false);
     setSelectedAnswer(null);
-  }, [levelNum]);
+  }, [levelNum, generateQuestions]);
 
   useEffect(() => {
     if (gameOver || showResult) return;
@@ -208,7 +222,7 @@ function GameLevel() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [currentQuestion, gameOver, showResult]);
+  }, [currentQuestion, gameOver, showResult, handleNextQuestion]);
 
   const checkAnswer = (selectedOption) => {
     playSound("click");
@@ -222,22 +236,6 @@ function GameLevel() {
     }
     setShowResult(true);
     setTimeout(handleNextQuestion, 1500);
-  };
-
-  const handleNextQuestion = () => {
-    setShowResult(false);
-    setSelectedAnswer(null);
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-      setTimeLeft(30);
-    } else {
-      setGameOver(true);
-      const passed = score >= Math.ceil(questions.length * 0.6);
-      if (passed) {
-        completeLevel(levelNum);
-        playSound("win");
-      }
-    }
   };
 
   const restartGame = () => {

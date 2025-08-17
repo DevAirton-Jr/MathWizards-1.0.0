@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -10,21 +10,35 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "../firebase";
 
-// Criação do contexto
 const AuthContext = createContext();
 
-// Hook para facilitar o uso
 export function useAuth() {
   return useContext(AuthContext);
 }
 
-// Provider do contexto
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Registro de novo usuário
+  const fetchUserProfile = useCallback(async () => {
+    if (!currentUser) return null;
+
+    const userRef = doc(db, "users", currentUser.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (userSnap.exists()) {
+      const userData = userSnap.data();
+      if (!userData.currentLevel) userData.currentLevel = 1;
+      if (!userData.completedLevels) userData.completedLevels = [];
+
+      setUserProfile(userData);
+      return userData;
+    }
+
+    return null;
+  }, [currentUser]);
+
   async function signup(email, password, name) {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(userCredential.user, { displayName: name });
@@ -36,24 +50,21 @@ export function AuthProvider({ children }) {
       age: "",
       photoURL: "",
       completedLevels: [],
-      currentLevel: 1, // Começa com o nível 1 desbloqueado
+      currentLevel: 1,
       createdAt: new Date().toISOString()
     });
 
     return userCredential;
   }
 
-  // Login
   function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
-  // Logout
   function logout() {
     return signOut(auth);
   }
 
-  // Atualização do perfil do usuário no Firestore e localmente
   async function updateUserProfile(data) {
     if (!currentUser) return;
 
@@ -66,7 +77,6 @@ export function AuthProvider({ children }) {
     }
   }
 
-  // Upload da foto de perfil
   async function uploadProfilePicture(file) {
     if (!currentUser) return;
 
@@ -77,14 +87,11 @@ export function AuthProvider({ children }) {
     return photoURL;
   }
 
-  // Marcar um nível como concluído e desbloquear o próximo
   async function completeLevel(levelId) {
     if (!userProfile) return;
 
     const completedLevels = [...(userProfile.completedLevels || [])];
-    if (!completedLevels.includes(levelId)) {
-      completedLevels.push(levelId);
-    }
+    if (!completedLevels.includes(levelId)) completedLevels.push(levelId);
 
     const nextLevel = Math.max(userProfile.currentLevel || 1, levelId + 1);
 
@@ -94,28 +101,6 @@ export function AuthProvider({ children }) {
     });
   }
 
-  // Buscar o perfil do usuário no banco de dados
-  async function fetchUserProfile() {
-    if (!currentUser) return null;
-
-    const userRef = doc(db, "users", currentUser.uid);
-    const userSnap = await getDoc(userRef);
-
-    if (userSnap.exists()) {
-      const userData = userSnap.data();
-
-      // Preenche com valores padrão, se estiverem faltando
-      if (!userData.currentLevel) userData.currentLevel = 1;
-      if (!userData.completedLevels) userData.completedLevels = [];
-
-      setUserProfile(userData);
-      return userData;
-    }
-
-    return null;
-  }
-
-  // Escuta mudanças de autenticação (login/logout)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setCurrentUser(user);
@@ -130,9 +115,8 @@ export function AuthProvider({ children }) {
     });
 
     return unsubscribe;
-  }, []);
+  }, [fetchUserProfile]);
 
-  // Valores expostos no contexto
   const value = {
     currentUser,
     userProfile,
@@ -145,7 +129,6 @@ export function AuthProvider({ children }) {
     fetchUserProfile
   };
 
-  // Fornece o contexto para a árvore de componentes
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}
