@@ -30,8 +30,14 @@ MathWizards é um jogo educativo de matemática com sistema de login, níveis pr
 - React Router
 - CSS Moderno
 
-## Como Executar o Projeto
+## Link do Deploy do game
+- mathwizardsgame.netlify.app
+- <img width="474" height="161" alt="image" src="https://github.com/user-attachments/assets/7169f16d-97b6-485a-9791-845f2120c101" />
 
+
+
+
+## Como Executar o Projeto na sua IDE
 1. Clone o repositório
 2. Instale as dependências com `npm install`
 3. Configure o Firebase:
